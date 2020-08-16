@@ -179,7 +179,9 @@ Just replace all instances of `append` with `appendSelect` in your code and your
 
 Takes a _selector_ representing a DOM element and either [appends](https://github.com/d3/d3-selection#selection_append) that element to the selection if it doesn't exist or [selects](https://github.com/d3/d3-selection#selection_select) it if it does.
 
-The _selector_ should be a valid [CSS selector](https://www.w3schools.com/cssref/css_selectors.asp) of the element you want to append with or without an id attribute or one or more classes, for example, `div`, `div#myId` or `div.myClass.another`.
+The _selector_ should be a valid [CSS selector](https://www.w3schools.com/cssref/css_selectors.asp) of the element you want to append, with or without an id attribute or one or more classes, for example, `div`, `div#myId` or `div.myClass.another`.
+
+`appendSelect` will select and return the _first_ element matching your CSS selector, if one exists, so you should make sure your selector is unique within the context of the _selection_.
 
 You can chain `appendSelect` with other methods just as you would with either `append` or `select`.
 
