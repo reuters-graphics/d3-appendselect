@@ -9,7 +9,7 @@ const config = {
     name: 'd3',
     format: 'umd',
     extend: true,
-    banner: `// ${pkg.name} v${pkg.version} Copyright ${(new Date()).getFullYear()} ${pkg.author.name}`,
+    banner: `// ${pkg.name} v${pkg.version} Copyright ${(new Date()).getFullYear()} ${pkg.author}`,
     globals: {
       'd3-selection': 'd3',
     },
