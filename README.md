@@ -4,6 +4,8 @@
 
 Idempotent append operations for D3 selections.
 
+[![npm version](https://badge.fury.io/js/d3-appendselect.svg)](https://badge.fury.io/js/d3-appendselect)
+
 ### Install
 
 ```
