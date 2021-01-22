@@ -218,17 +218,15 @@ const MyReactComponent = (props) => {
 };
 ```
 
-In the example, your React component drives when to call your chart function -- updating whenever the data prop changes -- but doesn't need to worry about the internal state of your chart and whether it's already appended non-data-bound elements like `svg`.
-
-The same can concept can be applied in Svelte using the [`afterUpdate`](https://svelte.dev/tutorial/update) lifecycle event. 
+Your React component drives when to call your chart function -- updating whenever the data prop changes -- but doesn't need to worry about the internal state of your chart and whether it's already appended non-data-bound elements like `svg`.
 
 #### At scale
 
-At Reuters, d3-appendselect is a key part of how we build reusable charts that plug into larger applications we build in modern component frameworks.
+At Reuters, d3-appendselect is a key part of how we build modular charts that plug into larger applications we build in modern component frameworks.
 
 Lately, it been popular to use D3 strictly for a subset of its utility functions and give control of the DOM to whatever framework you're building in. We don't because D3 happens to be really good at building charts already. We just need to build them idempotently so they work well alongside other components that require functional ["purity"](https://reactjs.org/docs/components-and-props.html#props-are-read-only). d3-appendselect is a tiny utility that gets us there.
 
-As an added benefit of using d3-appendselect, we can develop charts that can be used in whatever context we need them -- React, Svelte or just plain JavaScript -- without locking us into a particular framework.
+As an added benefit of using d3-appendselect, we can develop charts that can be used in whatever context we need them without locking us into a particular framework.
 
 You can check out our [template for reusable charts](https://github.com/reuters-graphics/bluprint_chart-module-svelte/) to see d3-appendselect in action.
 
