@@ -228,7 +228,7 @@ Lately, it's been popular to use D3 strictly for a subset of its utility functio
 
 As an added benefit of using d3-appendselect, we can develop charts that can be used in whatever context we need them without locking us into a particular framework.
 
-You can check out our [template for reusable charts](https://github.com/reuters-graphics/bluprint_chart-module-svelte/) to see d3-appendselect in action.
+You can check out our [template for chart modules](https://github.com/reuters-graphics/bluprint_chart-module-svelte/) to see d3-appendselect in action.
 
 ## API Reference
 
