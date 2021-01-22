@@ -24,6 +24,11 @@ $ npm add d3-appendselect
 import * as d3 from 'd3';
 import 'd3-appendselect';
 
+// or use individual d3 modules...
+import * as d3 from 'd3-selection';
+import { appendSelect } from 'd3-appendselect';
+d3.selection.prototype.appendSelect = appendSelect;
+
 const g = d3.select('body')
   .appendSelect('svg')
    .attr('width', 250)
@@ -129,7 +134,7 @@ function makeList() {
 
 Beyond the simple examples above, using `appendSelect` gives complex charts extremely predictable APIs, which helps them work in almost any JavaScript environment, especially within modern component frameworks that rely heavily on functional programming concepts like [pure functions](https://medium.com/@jamesjefferyuk/javascript-what-are-pure-functions-4d4d5392d49c).
 
-Charts written with `appendSelect` instead of `append` are easier to think about because they don't have side effects that are contingent on the context in which the chart is called. Call it once, twice, 100 times, an idempotent chart Just Works and by guaranteeing to produce the same chart elements, you don't have to think about how to integrate your chart's state with the state of app that uses it.
+Charts written with `appendSelect` instead of `append` are easier to think about because they don't have side effects that are contingent on the context in which the chart is called. Call it once, twice, 100 times, an idempotent chart Just Works and by guaranteeing to produce the same chart elements, you don't have to think about how to integrate your chart's state with the state of the app that uses it.
 
 Writing reusable charts with `appendSelect` is also _easier_ and makes your chart's code simpler. The syntax is just... _nice!_
 
@@ -179,7 +184,7 @@ Just replace all instances of `append` with `appendSelect` in your code and your
 
 Takes a _selector_ representing a DOM element and either [appends](https://github.com/d3/d3-selection#selection_append) that element to the selection if it doesn't exist or [selects](https://github.com/d3/d3-selection#selection_select) it if it does.
 
-The _selector_ should be a valid [CSS selector](https://www.w3schools.com/cssref/css_selectors.asp) of the element you want to append, with or without an id attribute or one or more classes, for example, `div`, `div#myId` or `div.myClass.another`.
+The _selector_ should be a valid [CSS selector](https://www.w3schools.com/cssref/css_selectors.asp) of the element you want to append, with or without an id attribute or one or more class names, for example, `div`, `div#myId` or `div.myClass.another`.
 
 `appendSelect` will select and return the _first_ element matching your CSS selector, if one exists, so you should make sure your selector is unique within the context of the _selection_.
 
@@ -192,9 +197,13 @@ selection
   .attr('height', 100)
   .appendSelect('g')
   .attr('transform', 'translate(10, 10)');
+
+// <svg width="500" height="100">
+//   <g transform="translate(10, 10)"></g>
+// </svg>
 ```
 
-You can also use `appendSelect` after data-bound joins to create peer elements.
+You can also use `appendSelect` after data-bound joins to create complex peer elements.
 
 ```javascript
 const users = selection.selectAll('div.user')
@@ -202,11 +211,27 @@ const users = selection.selectAll('div.user')
   .join('div')
   .attr('class', 'user');
 
-users.appendSelect('img')
+users.appendSelect('figure')
+  .appendSelect('img')
   .attr('src', d => d.avatar);
 
 users.appendSelect('p')
+  .appendSelect('span.name')
   .text(d => d.name);
+
+users.appendSelect('p')
+  .appendSelect('span.age')
+  .text(d => d.age);
+
+// <div class="user">
+//   <figure>
+//     <img src="https://...">
+//   </figure>
+//   <p>
+//     <span class="name">Jane Doe</span>
+//     <span class="age">23</span>
+//   </p>
+// </div>
 ```
 
 ## Testing
