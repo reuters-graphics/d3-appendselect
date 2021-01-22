@@ -57,7 +57,7 @@ If you've read Mike Bostock's [Towards Reusable Charts](https://bost.ocks.org/mi
 
 Idempotence takes that reusable pattern the next step by making those functions extremely predictable. An idempotent chart function always produces the same chart _elements_ regardless of the context in which the function is called. It makes your chart much easier to use and reason about and, as an extra benefit, easier to write!
 
-d3-appendselect is a shortcut for making non-data-bound append operations idempotent. That helps you write chart functions that act like modern components and will fit naturally with other ["pure"](https://reactjs.org/docs/components-and-props.html#props-are-read-only)-component frameworks like React, Svelte, Vue and others. 
+d3-appendselect is a shortcut for making non-data-bound append operations idempotent. That helps you write chart functions that act like modern components and will fit naturally with other ["pure"](https://reactjs.org/docs/components-and-props.html#props-are-read-only)-component frameworks like React, Svelte, Vue and more. 
 
 #### Idempotence in D3
 
