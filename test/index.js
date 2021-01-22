@@ -93,10 +93,12 @@ describe('appendSelect', function() {
       {
         pic: 'https://img1',
         name: 'George Washington',
+        age: 57,
       },
       {
         pic: 'https://img2',
         name: 'Thomas Jefferson',
+        age: 57,
       },
     ];
 
@@ -106,12 +108,16 @@ describe('appendSelect', function() {
         .join('div')
         .attr('class', 'user');
 
-      users.appendSelect('img')
+      users.appendSelect('figure')
+        .appendSelect('img')
         .attr('src', d => d.pic);
 
-      users.appendSelect('div')
-        .appendSelect('span.deep')
+      users.appendSelect('p')
+        .appendSelect('span.name')
         .text(d => d.name);
+      users.appendSelect('p')
+        .appendSelect('span.age')
+        .text(d => d.age);
     };
 
     draw(someUsers);
@@ -120,8 +126,8 @@ describe('appendSelect', function() {
 
     expect(DOM.window.document.body.innerHTML).to.be(
       [
-        '<div class="user"><img src="https://img1"><div><span class="deep">George Washington</span></div></div>',
-        '<div class="user"><img src="https://img2"><div><span class="deep">Thomas Jefferson</span></div></div>',
+        '<div class="user"><figure><img src="https://img1"></figure><p><span class="name">George Washington</span><span class="age">57</span></p></div>',
+        '<div class="user"><figure><img src="https://img2"></figure><p><span class="name">Thomas Jefferson</span><span class="age">57</span></p></div>',
       ].join('')
     );
 
@@ -129,24 +135,28 @@ describe('appendSelect', function() {
       {
         pic: 'https://img1',
         name: 'George Washington',
+        age: 57,
       },
       {
         pic: 'https://img2',
         name: 'Thomas Jefferson',
+        age: 57,
       },
       {
         pic: 'https://img3',
         name: 'Abraham Lincoln',
+        age: 52,
       },
     ];
 
     draw(someMoreUsers);
+    draw(someMoreUsers);
 
     expect(DOM.window.document.body.innerHTML).to.be(
       [
-        '<div class="user"><img src="https://img1"><div><span class="deep">George Washington</span></div></div>',
-        '<div class="user"><img src="https://img2"><div><span class="deep">Thomas Jefferson</span></div></div>',
-        '<div class="user"><img src="https://img3"><div><span class="deep">Abraham Lincoln</span></div></div>',
+        '<div class="user"><figure><img src="https://img1"></figure><p><span class="name">George Washington</span><span class="age">57</span></p></div>',
+        '<div class="user"><figure><img src="https://img2"></figure><p><span class="name">Thomas Jefferson</span><span class="age">57</span></p></div>',
+        '<div class="user"><figure><img src="https://img3"></figure><p><span class="name">Abraham Lincoln</span><span class="age">52</span></p></div>',
       ].join('')
     );
 
@@ -154,12 +164,13 @@ describe('appendSelect', function() {
       {
         pic: 'https://img1',
         name: 'George Washington',
+        age: 57,
       },
     ];
 
     draw(fewerUsers);
     expect(DOM.window.document.body.innerHTML).to.be(
-      '<div class="user"><img src="https://img1"><div><span class="deep">George Washington</span></div></div>'
+      '<div class="user"><figure><img src="https://img1"></figure><p><span class="name">George Washington</span><span class="age">57</span></p></div>'
     );
 
     const noUsers = [];

@@ -2,7 +2,7 @@
 
 # d3-appendselect
 
-Idempotent append operations for D3 selections.
+Idempotent append operations for non-data-bound D3 selections.
 
 [![npm version](https://badge.fury.io/js/d3-appendselect.svg)](https://badge.fury.io/js/d3-appendselect)
 
@@ -36,18 +36,28 @@ const g = d3.select('body')
   .appendSelect('g.chart-container')
    .attr('transform', 'translate(10, 10)');
 
-const circles = g.selectAll('circle')
+const circles = g.selectAll('g.circles')
   .data(myData)
+  .join('g')
+  .attr('class', 'circles');
+
+circles.appendSelect('circle')
+  .attr('r', d => d.r);
+
+circles.appendSelect('text')
+  .text(d => d.label);
   // ... etc.  
 ```
 
 ## Why this?
 
-Idempotent functions are those that produce the same result no matter when or how often they're called.
+Idempotent functions produce the same result no matter when or how often they're called.
 
 If you've read Mike Bostock's [Towards Reusable Charts](https://bost.ocks.org/mike/chart/), we can make charts reusable by writing them as configurable functions.
 
 Idempotence takes that reusable pattern the next step by making those functions extremely predictable. An idempotent chart function always produces the same chart _elements_ regardless of the context in which the function is called. It makes your chart much easier to use and reason about and, as an extra benefit, easier to write!
+
+d3-appendselect is a shortcut for making non-data-bound append operations idempotent. That helps you write chart functions that act like modern components and will fit naturally with other ["pure"](https://reactjs.org/docs/components-and-props.html#props-are-read-only) component-driven frameworks like React, Svelte, Vue and others. 
 
 #### Idempotence in D3
 
@@ -134,7 +144,7 @@ function makeList() {
 
 Beyond the simple examples above, using `appendSelect` gives complex charts extremely predictable APIs, which helps them work in almost any JavaScript environment, especially within modern component frameworks that rely heavily on functional programming concepts like [pure functions](https://medium.com/@jamesjefferyuk/javascript-what-are-pure-functions-4d4d5392d49c).
 
-Charts written with `appendSelect` instead of `append` are easier to think about because they don't have side effects that are contingent on the context in which the chart is called. Call it once, twice, 100 times, an idempotent chart Just Works and by guaranteeing to produce the same chart elements, you don't have to think about how to integrate your chart's state with the state of the app that uses it.
+Charts written with `appendSelect` instead of `append` are easier to think about because they don't have side effects that are contingent on the context in which the chart is called. Call it once, twice, 100 times, an idempotent chart just works and by guaranteeing to produce the same chart elements, you don't have to think about how to integrate your chart's state with the state of the app that uses it.
 
 Writing reusable charts with `appendSelect` is also _easier_ and makes your chart's code simpler. The syntax is just... _nice!_
 
@@ -176,7 +186,51 @@ function drawChart() {
 }
 ```
 
-Just replace all instances of `append` with `appendSelect` in your code and your chart becomes a first-class component that will plugin just about anywhere.
+Just replace instances of non-data-bound `append` with `appendSelect` in your code and your chart becomes a first-class "pure" component that will plug in just about anywhere.
+
+#### In context
+
+Writing idempotent chart functions with d3-appendselect makes it easy to write charts that work well with other component frameworks.
+
+Take a basic example in React:
+
+```javascript
+const drawMyChart = (selection, data) => {
+  const svg = d3.select(selection)
+    .appendSelect('svg');
+  
+  svg.selectAll('circle')
+    .data(data)
+    .join('circle')
+    // etc...
+}
+
+const MyReactComponent = (props) => {
+  const { myData } = props;
+
+  useEffect(() => {
+    drawMyChart(myChartContainer.current, myData);
+  }, [myData]);
+
+  return (
+    <div ref={myChartContainer}></div>
+  );
+};
+```
+
+In the example, your React component drives when to call your chart function -- updating whenever the data prop changes -- but doesn't need to worry about the internal state of your chart and whether it's already appended non-data-bound elements like `svg`.
+
+The same can concept can be applied in Svelte using the [`afterUpdate`](https://svelte.dev/tutorial/update) lifecycle event. 
+
+#### At scale
+
+At Reuters, d3-appendselect is a key part of how we build reusable charts that plug into larger applications we build in modern component frameworks.
+
+Lately, it been popular to use D3 strictly for a subset of its utility functions and give control of the DOM to whatever framework you're building in. We don't because D3 happens to be really good at building charts already. We just need to build them idempotently so they work well alongside other components that require functional ["purity"](https://reactjs.org/docs/components-and-props.html#props-are-read-only). d3-appendselect is a tiny utility that gets us there.
+
+As an added benefit of using d3-appendselect, we can develop charts that can be used in whatever context we need them -- React, Svelte or just plain JavaScript -- without locking us into a particular framework.
+
+You can check out our [template for reusable charts](https://github.com/reuters-graphics/bluprint_chart-module-svelte/) to see d3-appendselect in action.
 
 ## API Reference
 
