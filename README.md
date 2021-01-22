@@ -222,9 +222,9 @@ Your React component drives when to call your chart function -- updating wheneve
 
 #### At scale
 
-At Reuters, d3-appendselect is a key part of how we build modular charts that plug into larger applications we build in modern component frameworks.
+At Reuters, d3-appendselect is a key part of how we build modular charts that plug in to larger applications.
 
-Lately, it been popular to use D3 strictly for a subset of its utility functions and give control of the DOM to whatever framework you're building in. We don't because D3 happens to be really good at building charts already. We just need to build them idempotently so they work well alongside other components that require functional ["purity"](https://reactjs.org/docs/components-and-props.html#props-are-read-only). d3-appendselect is a tiny utility that gets us there.
+Lately, it's been popular to use D3 strictly for a subset of its utility functions and give control of the DOM to whatever component framework you're building in -- React, Svelte, whatever. We don't because D3 happens to be really good at building charts already. We just need to build them idempotently so they work well alongside other components that require functional ["purity"](https://reactjs.org/docs/components-and-props.html#props-are-read-only). d3-appendselect is a tiny utility that gets us there.
 
 As an added benefit of using d3-appendselect, we can develop charts that can be used in whatever context we need them without locking us into a particular framework.
 
