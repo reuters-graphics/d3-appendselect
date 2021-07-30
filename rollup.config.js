@@ -5,7 +5,7 @@ const config = {
   input: 'index.js',
   external: Object.keys(pkg.dependencies || {}).filter(key => /^d3-/.test(key)),
   output: {
-    file: 'dist/index.js',
+    file: `dist/${pkg.name}.min.js`,
     name: 'd3',
     format: 'umd',
     extend: true,
@@ -14,24 +14,9 @@ const config = {
       'd3-selection': 'd3',
     },
   },
-  plugins: [],
+  plugins: [
+    terser(),
+  ],
 };
 
-export default [
-  config,
-  {
-    ...config,
-    output: {
-      ...config.output,
-      file: `dist/${pkg.name}.min.js`,
-    },
-    plugins: [
-      ...config.plugins,
-      terser({
-        output: {
-          preamble: config.output.banner,
-        },
-      }),
-    ],
-  },
-];
+export default config;

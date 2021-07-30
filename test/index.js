@@ -1,8 +1,10 @@
-const d3 = require('d3');
-require('../dist/');
+import './../index.js';
 
-const expect = require('expect.js');
-const jsdom = require('jsdom');
+import * as d3 from 'd3';
+
+import expect from 'expect.js';
+import jsdom from 'jsdom';
+
 const { JSDOM } = jsdom;
 
 describe('appendSelect', function() {
