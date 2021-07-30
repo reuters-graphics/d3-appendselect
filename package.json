@@ -14,8 +14,11 @@
   "jsdelivr": "dist/d3-appendselect.min.js",
   "unpkg": "dist/d3-appendselect.min.js",
   "exports": {
-    "umd": "./dist/d3-appendselect.min.js",
-    "default": "./index.js"
+    ".": {
+      "umd": "./dist/d3-appendselect.min.js",
+      "default": "./index.js"
+    },
+    "./appendSelect": "./lib/appendSelect.js"
   },
   "repository": {
     "type": "git",
