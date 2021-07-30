@@ -42,6 +42,9 @@
     "rollup-plugin-terser": "^7.0.0"
   },
   "dependencies": {
-    "d3-selection": "^3.0.0"
+    "d3-selection": "2 - 3"
+  },
+  "engines": {
+    "node": ">=12"
   }
 }

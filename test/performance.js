@@ -22,27 +22,27 @@ describe('performance tests', function() {
       body.appendSelect(`div.appended-${i}`);
     };
 
-    const drawWithoutAppendSelect = (i) => {
+    const drawWithAppend = (i) => {
       body.append(`div.appended-${i}`);
     };
 
     DOM = new JSDOM('<!DOCTYPE html><html><body></body></html>');
     body = d3.select(DOM.window.document).select('body');
 
-    const test1start = process.hrtime.bigint();
+    const testAppendSelectStart = process.hrtime.bigint();
     range(1000).forEach((i) => { drawWithAppendSelect(i); });
-    const test1time = process.hrtime.bigint() - test1start;
+    const testAppendSelectTime = process.hrtime.bigint() - testAppendSelectStart;
 
     DOM = new JSDOM('<!DOCTYPE html><html><body></body></html>');
     body = d3.select(DOM.window.document).select('body');
 
-    const test2start = process.hrtime.bigint();
-    range(1000).forEach((i) => { drawWithoutAppendSelect(i); });
-    const test2time = process.hrtime.bigint() - test2start;
+    const testAppendStart = process.hrtime.bigint();
+    range(1000).forEach((i) => { drawWithAppend(i); });
+    const testAppendTime = process.hrtime.bigint() - testAppendStart;
 
-    const msDelta = Number(test1time - test2time) / 1e6;
+    const msDelta = Number(testAppendSelectTime - testAppendTime) / 1e6;
 
-    console.log('  Milliseconds difference over 1K appends\n  ', msDelta);
+    console.log('  Milliseconds difference over 1K appends: ', msDelta);
     expect(msDelta < 500).to.be(true);
   });
 });
