@@ -9,13 +9,13 @@ Idempotent append operations for non-data-bound D3 selections.
 ### Install
 
 ```
-$ yarn add d3-appendselect
+yarn add d3-appendselect
 ```
 
 ... or ...
 
 ```
-$ npm add d3-appendselect
+npm add d3-appendselect
 ```
 
 ### Use
@@ -57,7 +57,7 @@ If you've read Mike Bostock's [Towards Reusable Charts](https://bost.ocks.org/mi
 
 Idempotence takes that reusable pattern the next step by making those functions extremely predictable. An idempotent chart function always produces the same chart _elements_ regardless of the context in which the function is called. It makes your chart much easier to use and reason about and, as an extra benefit, easier to write!
 
-d3-appendselect is a shortcut for making non-data-bound append operations idempotent. That helps you write chart functions that act like modern components and will fit naturally with other ["pure"](https://reactjs.org/docs/components-and-props.html#props-are-read-only)-component frameworks like React, Svelte, Vue and more. 
+d3-appendselect is a shortcut for making non-data-bound append operations idempotent. That helps you write chart functions that act like modern components and will fit naturally with other ["pure"](https://reactjs.org/docs/components-and-props.html#props-are-read-only)-component frameworks like React, Svelte, Vue and more.
 
 #### Idempotence in D3
 
@@ -223,9 +223,9 @@ Your React component drives when to call your chart function -- updating wheneve
 
 At Reuters, d3-appendselect is a key part of how we build modular charts that plug in to larger applications.
 
-Lately, it's been popular to use D3 strictly for a subset of its utility functions and give control of the DOM to whatever component framework you're building in -- React, Svelte, whatever. We don't because D3 happens to be really good at building charts already. We just need to build them idempotently so they work better alongside other components that require functional ["purity"](https://reactjs.org/docs/components-and-props.html#props-are-read-only). d3-appendselect is a tiny utility that gets us there.
+One alternative to this approach has been using D3 strictly for a subset of its utility functions and giving control of the DOM to whatever component framework you're building in -- React, Svelte, whatever. But D3 happens to be really good at building charts already. We just need to build them idempotently so they work better alongside other components that require functional ["purity"](https://reactjs.org/docs/components-and-props.html#props-are-read-only). d3-appendselect is a tiny utility that gets us there.
 
-As an added benefit of using d3-appendselect, we can develop charts that can be used in whatever context we need them without locking us into a particular framework.
+That lets us develop charts that can be used in whatever context we need them without locking us into a particular JS framework, so a chart built this way can work across a React, a Svelte, a Vue or a vanilla JS project with no changes to the module code.
 
 You can check out our [template for chart modules](https://github.com/reuters-graphics/bluprint_chart-module-svelte/) to see d3-appendselect in action.
 
@@ -288,5 +288,5 @@ users.appendSelect('p')
 ## Testing
 
 ```
-$ yarn test
+yarn test
 ```
