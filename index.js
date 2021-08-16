@@ -1,6 +1,1 @@
-import appendSelect from './lib/appendSelect.js';
-import { selection } from 'd3-selection';
-
-selection.prototype.appendSelect = appendSelect;
-
-export { appendSelect };
+export { default as appendSelect } from './lib/appendSelect.js';

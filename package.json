@@ -17,9 +17,9 @@
     ".": {
       "umd": "./dist/d3-appendselect.min.js",
       "default": "./index.js"
-    },
-    "./appendSelect": "./lib/appendSelect.js"
+    }
   },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reuters-graphics/d3-appendselect.git"

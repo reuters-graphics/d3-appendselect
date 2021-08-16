@@ -22,11 +22,11 @@ npm add d3-appendselect
 
 ```javascript
 import * as d3 from 'd3';
-import 'd3-appendselect';
-
 // or use individual d3 modules...
 import * as d3 from 'd3-selection';
+
 import { appendSelect } from 'd3-appendselect';
+
 d3.selection.prototype.appendSelect = appendSelect;
 
 const g = d3.select('body')

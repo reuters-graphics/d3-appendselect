@@ -1,9 +1,11 @@
-import './../index.js';
-
 import * as d3 from 'd3';
 
+import { appendSelect } from './../index.js';
 import expect from 'expect.js';
 import jsdom from 'jsdom';
+
+d3.selection.prototype.appendSelect = appendSelect;
+
 
 const { JSDOM } = jsdom;
 
